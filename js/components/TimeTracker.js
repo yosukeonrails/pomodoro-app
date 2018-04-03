@@ -9,7 +9,7 @@ class TimeTracker extends React.Component{
         super(props)
 
         this.state= {
-            min:1,
+            min:25,
             sec:0,
             timerRunning:false
         }
@@ -30,14 +30,12 @@ class TimeTracker extends React.Component{
 
                 // here go to a function that sees how many pomodores there are
                 // if pomodore is not 0 , give short break, 
-
+                
                 this.toggleTimer(false);
                 return
             }
 
         }
-
-       
 
         this.setState({
             sec:sec,
