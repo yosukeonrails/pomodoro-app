@@ -14,7 +14,7 @@ const config = {
               {
                 loader:'babel-loader',
                 options:{
-                  presets:['babel-preset-env', 'react','es2015']
+                  presets:['babel-preset-env', 'react','es2015','stage-2']
                     }
               }
               ]

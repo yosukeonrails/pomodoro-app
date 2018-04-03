@@ -8,14 +8,21 @@
     "babel": "babel",
     "webpack": "webpack",
     "dev": "webpack --mode development js/index.js --output ./build/bundle.js",
-    "build": "webpack --mode production ./foo/src/js/index.js --output ./build/index.js"
+    "build": "webpack --mode production ./foo/src/js/index.js --output ./build/index.js",
+    "watch": "webpack --mode development js/index.js --output ./build/bundle.js -w"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -23,7 +30,9 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",
     "style-loader": "^0.20.3",
