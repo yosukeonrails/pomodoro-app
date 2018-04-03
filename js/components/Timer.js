@@ -4,17 +4,18 @@ let timer_style= require('../../css/timer.less'); // loading the timer css file
 import {connect} from 'react-redux';
 import TimeTracker from '../components/TimeTracker';
 
-let x = 300;
+let x = 500;
 let innerWidth = x - (x/5) + 'px';
 let innerHalf =  (( x- (x/5)  ) / 2  )  + 'px'
 let width = x+'px';
 let half =  (x/2) + 'px';
 let tracker_color= 'blue';
 let contentPosition = (x/10) +'px';
+
 const styles = {
     timerContainer:{
         height:width,
-        width:width
+        width: width
     },
     "pie":{
         "transition":"all 1s",
@@ -32,8 +33,9 @@ const styles = {
         left:contentPosition
     },
     innerContent:{
-        top:half,
-        width:width
+        top:0,
+        width:(x-(x/5)) + 'px'
+    
     },
     timerBackground:{
         width: width,
@@ -65,23 +67,24 @@ const styles = {
     
 }
 
-let pie_left = {
-    transform: 'rotate(0deg)'
-}
-
-let pie_right = {
-    transform: 'rotate(180deg)'
-}
-let mergedLeft = {...styles.hold , ...pie_left};
 
 class Timer extends React.Component{
-
-
     
-    render(){
-        console.log(mergedLeft);
-        console.log(styles.pie)
+    constructor(props){
+        super(props);
+    }
 
+
+    componentDidMount() {
+
+        if(this.props.timerStarted){
+            console.log('Timer is on')
+        }
+    
+    }
+
+    render(){   
+        console.log(this.props)
         return(
             <div> 
 
@@ -97,7 +100,7 @@ class Timer extends React.Component{
                 
                     <div className="innerCircle" style={styles.innerCircle} >
                         <div className="content" style={styles.innerContent}>
-                        <TimeTracker/>
+                         <TimeTracker/>
                         </div>
                     </div>
 
@@ -109,10 +112,9 @@ class Timer extends React.Component{
 }
 
 var mapStateToProps = (state)=>{
-    console.log('here is state')
-    console.log(state);
+
     return{
-        todos:state.todo.todos    
+        timer:state.timer.timerStarted    
     }
 }
 

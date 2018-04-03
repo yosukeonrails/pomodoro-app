@@ -7,8 +7,26 @@ class TimeTracker extends React.Component{
 
     render(){
         return(
-            <div> 
-                <h1>Time Tracker!</h1>
+          <div> 
+            <div className="timeTracker">
+
+                <div className="timeDisplay">
+
+                        <div className="timerNumbers">
+                            <div className="timerTime" id="minutes" > <h1> 00 </h1></div>
+                            <div className="timerTime" id="colon" > <h1> : </h1></div>
+                            <div className="timerTime" id="seconds" > <h1> 00 </h1></div>
+                        </div>
+                        
+                </div>
+
+                    <div>
+                        <button> Start </button>
+                        <button> Pause </button>
+                        <button> Reset </button>
+                    </div>
+               
+            </div>       
           </div>
         )
     }
