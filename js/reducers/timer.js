@@ -1,19 +1,20 @@
 
 var action = require('../actions/index');
-import {ADD_TODO} from '../actions/index';
+import {TOGGLE_TIMER} from '../actions/index';
 
 let stateDefault = {
      timerStarted:false
 }
 
 export default function timerReducer(state, action){
+
     state = state || stateDefault;
 
     switch (action.type) {
     
-        case 'ADD_TODO':    
-
-        return action.data;
+        case 'TOGGLE_TIMER':    
+        console.log(action)
+        return {...state , timerStarted:action.timerStarted }
         break;
         
     }

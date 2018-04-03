@@ -1,9 +1,9 @@
 
-export var ADD_TODO = 'GET_TODOS';
+export var TOGGLE_TIMER = 'TOGGLE_TIMER';
 
-export function addTodo(data){
+export function toggleTimer(start){
  return {
-     type:GET_TODOS,
-     data:data
+     type:TOGGLE_TIMER,
+     timerStarted:start
  }
 }
