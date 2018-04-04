@@ -13,20 +13,26 @@ class TimeTracker extends React.Component{
             sec:0,
             timerRunning:false,
             breakMode:false,
-            pomodores:0
+            mode:'work',
+            pomodores:0,
+            bigBreak:false,
+            done:false
         }
 
     }   
 
-    giveBreak(){
+    giveBreak(size){
 
+        let min = (size==="small") ? 1 : 3 ;
+        let done = (size === "small") ? false : true;
 
-        console.log('break time ');
+        this.setState({ pomodores:this.state.pomodores+1})
 
         this.setState({
-            min:0,
+            min:min,
             sec:0,
-            breakMode:true
+            mode:'short-break',
+            done:done
         })
 
     }
@@ -45,31 +51,37 @@ class TimeTracker extends React.Component{
 
             if(min < 0  ){
                 
+                // if this.state.mode === 'done'
+                if(this.state.done){
+
+                   this.toggleTimer(false);
+
+                    return 
+                }
+
                 // if this is not a break
-                if(!this.state.breakMode){
+                if(this.state.mode === 'work'){
+                
+                    if(this.state.pomodores >= 3 ){
 
-                    this.setState({ pomodores:this.state.pomodores+1})
-
-                    if(this.props.pomodores >= 4 ){
-
-                        // give big break
+                        this.giveBreak("big");
+                        return
 
                     } else {
-                        this.giveBreak();
+                        this.giveBreak("small");
                     }
                     
                 } else {
 
-                     // if this is a break
+                     // if this is a break then go" back to work 
 
                     this.setState({
                         min:1,
                         sec:0,
-                        breakMode:false
+                        mode:'work'
                     })
+                } 
 
-                }
-                      
                 return
             } 
 
@@ -93,7 +105,7 @@ class TimeTracker extends React.Component{
         if(start && !this.state.timerRunning ){
 
             this.timer= setInterval(function(){ dis.updateTime(dis.state.min, dis.state.sec) },
-            1000);
+            100);
             
             this.setState({
                 min:1,
@@ -105,7 +117,9 @@ class TimeTracker extends React.Component{
             clearInterval(this.timer)
 
             this.setState({
-                timerRunning:false
+                timerRunning:false,
+                min:0,
+                sec:0
             })
 
         }
@@ -115,7 +129,7 @@ class TimeTracker extends React.Component{
 
     render(){
 
-        let tag = (this.state.breakMode) ? "Break Time" : "Work Time"
+        let tag = (this.state.mode === "short-break") ? "Break Time" : "Work Time"
 
         return(
           <div> 
