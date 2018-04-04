@@ -9,31 +9,69 @@ class TimeTracker extends React.Component{
         super(props)
 
         this.state= {
-            min:25,
+            min:1,
             sec:0,
-            timerRunning:false
+            timerRunning:false,
+            breakMode:false,
+            pomodores:0
         }
 
     }   
+
+    giveBreak(){
+
+
+        console.log('break time ');
+
+        this.setState({
+            min:0,
+            sec:0,
+            breakMode:true
+        })
+
+    }
 
     updateTime(minute, second){
         
         let min= minute;
         let sec = second -1;
+    
         console.log(sec)
 
-        if(sec < 0 ){
+        if(sec <= 0 ){
+
             min = min -1;       
             sec = 59;
 
-            if(min < 0 ){
-
-                // here go to a function that sees how many pomodores there are
-                // if pomodore is not 0 , give short break, 
+            if(min < 0  ){
                 
-                this.toggleTimer(false);
+                // if this is not a break
+                if(!this.state.breakMode){
+
+                    this.setState({ pomodores:this.state.pomodores+1})
+
+                    if(this.props.pomodores >= 4 ){
+
+                        // give big break
+
+                    } else {
+                        this.giveBreak();
+                    }
+                    
+                } else {
+
+                     // if this is a break
+
+                    this.setState({
+                        min:1,
+                        sec:0,
+                        breakMode:false
+                    })
+
+                }
+                      
                 return
-            }
+            } 
 
         }
 
@@ -58,6 +96,7 @@ class TimeTracker extends React.Component{
             1000);
             
             this.setState({
+                min:1,
                 timerRunning:true
             })
 
@@ -76,11 +115,14 @@ class TimeTracker extends React.Component{
 
     render(){
 
-        console.log(this.state)
+        let tag = (this.state.breakMode) ? "Break Time" : "Work Time"
+
         return(
           <div> 
-            <div className="timeTracker">
 
+              
+            <div className="timeTracker">
+          <div className="tracker_viwer">  <h1>{tag}</h1>  <h1>{this.state.pomodores}</h1></div>
                 <div className="timeDisplay">
 
                         <div className="timerNumbers">
@@ -108,8 +150,8 @@ var mapStateToProps = (state)=>{
     console.log('here is state')
     console.log(state);
     return{
-        todos:state.todo.todos,
-        timerStarted:state.timer.timerStarted 
+        timerStarted:state.timer.timerStarted,
+        pomodores:state.timer.pomodores
     }
 }
 

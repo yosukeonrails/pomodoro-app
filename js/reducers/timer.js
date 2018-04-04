@@ -3,7 +3,10 @@ var action = require('../actions/index');
 import {TOGGLE_TIMER} from '../actions/index';
 
 let stateDefault = {
-     timerStarted:false
+     timerStarted:false,
+     pomodoros:0,
+     break:0,
+     breakTime:false
 }
 
 export default function timerReducer(state, action){
