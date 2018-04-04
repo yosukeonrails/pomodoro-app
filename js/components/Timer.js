@@ -74,20 +74,25 @@ class Timer extends React.Component{
     
     constructor(props){
         super(props);
-    }
 
-
-    componentDidMount() {
-
-        if(this.props.timerStarted){
-            console.log('Timer is on')
+        this.state={
+            
+            breakLength:1,
+            workLength:2,
+            longBreakLength:15
         }
-    
+
     }
+
 
     render(){   
-
+        //0.016666667
         
+        let degrees1 =  (this.props.pie/100)*180  ;
+        styles.pie_left_rotation.transform = 'rotate('+degrees1+'deg)'
+        console.log(degrees1);
+        
+
         return(
             <div> 
 
@@ -103,7 +108,7 @@ class Timer extends React.Component{
                 
                     <div className="innerCircle" style={styles.innerCircle} >
                          <div className="content" style={styles.innerContent}>
-                           <TimeTracker x={x} innerWidth={innerWidth} half={half}/>
+                           <TimeTracker data={this.state} x={x} innerWidth={innerWidth} half={half}/>
                         </div>
                     </div>
 
@@ -117,8 +122,9 @@ class Timer extends React.Component{
 var mapStateToProps = (state)=>{
 
     return{
-        timer:state.timer.timerStarted    
-    }
+        timer:state.timer.timerStarted,
+        pie:state.timer.pie    
+    }   
 }
 
 var TimerComponent = connect(mapStateToProps)(Timer)

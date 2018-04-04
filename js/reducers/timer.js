@@ -1,12 +1,13 @@
 
 var action = require('../actions/index');
-import {TOGGLE_TIMER} from '../actions/index';
+import {TOGGLE_TIMER, UPDATE_PIE} from '../actions/index';
 
 let stateDefault = {
      timerStarted:false,
      pomodoros:0,
      break:0,
-     breakTime:false
+     breakTime:false,
+     pie:100
 }
 
 export default function timerReducer(state, action){
@@ -16,9 +17,14 @@ export default function timerReducer(state, action){
     switch (action.type) {
     
         case 'TOGGLE_TIMER':    
-        console.log(action)
         return {...state , timerStarted:action.timerStarted }
         break;
+
+           
+        case 'UPDATE_PIE':    
+        return {...state , pie:action.pie }
+        break;
+
         
     }
 

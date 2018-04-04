@@ -15,8 +15,6 @@ class Header extends React.Component{
 }
 
 var mapStateToProps = (state)=>{
-    console.log('here is state')
-    console.log(state);
     return{
         todos:state.todo.todos    
     }

@@ -72,5 +72,16 @@ export function editTodo(index,description){
         }
         
 
+        export var UPDATE_PIE = 'UPDATE_PIE';
+
+        export function updatePie(pie){
+        
+            return {
+              type:UPDATE_PIE,
+              pie:pie
+            }
+        
+           }
+        
 
 

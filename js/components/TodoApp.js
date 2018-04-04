@@ -45,7 +45,7 @@ class TodoApp extends React.Component{
     }
 
     removeTodo(index){
-        console.log('deleting', index )
+        
         this.props.dispatch(removeTodo(index)); 
 
     }

@@ -1,15 +1,23 @@
 const React = require('react');
 let timer_style= require('../../css/timer.less'); // loading the timer css file
 import {connect} from 'react-redux';
-import {toggleTimer} from '../actions'
+import {toggleTimer, updatePie} from '../actions'
 
 class TimeTracker extends React.Component{
 
     constructor(props){
         super(props)
 
+        this.updateTime = this.updateTime.bind(this);
+        this.giveBreak = this.giveBreak.bind(this);
+        
         this.state= {
-            min:1,
+
+            breakLength:this.props.data.breakLength,
+            workLength:this.props.data.workLength,
+            longBreakLength:this.props.data.longBreakLength,
+            currentLength:this.props.data.workLength,
+            min:this.props.data.workLength,
             sec:0,
             timerRunning:false,
             breakMode:false,
@@ -23,7 +31,7 @@ class TimeTracker extends React.Component{
 
     giveBreak(size){
 
-        let min = (size==="small") ? 1 : 3 ;
+        let min = (size==="small") ? this.state.breakLength : this.state.longBreakLength ;
         let done = (size === "small") ? false : true;
 
         this.setState({ pomodores:this.state.pomodores+1})
@@ -32,6 +40,7 @@ class TimeTracker extends React.Component{
             min:min,
             sec:0,
             mode:'short-break',
+            currentLength:min,
             done:done
         })
 
@@ -41,15 +50,17 @@ class TimeTracker extends React.Component{
         
         let min= minute;
         let sec = second -1;
-    
-        console.log(sec)
 
+        let pie = (this.props.pie - ( 1.66667*2 / this.state.currentLength ));
+
+        this.props.dispatch(updatePie(pie));
+        
         if(sec <= 0 ){
 
             min = min -1;       
             sec = 59;
 
-            if(min < 0  ){
+            if( min < 0  ){
                 
                 // if this.state.mode === 'done'
                 if(this.state.done){
@@ -75,9 +86,10 @@ class TimeTracker extends React.Component{
                      // if this is a break then go" back to work 
 
                     this.setState({
-                        min:1,
+                        min:this.state.workLength,
                         sec:0,
-                        mode:'work'
+                        mode:'work',
+                        currentLength:this.state.workLength
                     })
                 } 
 
@@ -144,7 +156,8 @@ class TimeTracker extends React.Component{
 
     render(){
      //   <div className="tracker_viwer">  <h1>{tag}</h1>  <h1>{this.state.pomodores}</h1></div>
-        console.log(this.props.x , this.props.innerWidth);
+
+
         let fifth = (this.props.x / 5) + "px"; 
         let tenth =  (this.props.x / 10) + "px"; 
         let buttonStyle= { height:tenth, width: fifth};
@@ -184,7 +197,8 @@ var mapStateToProps = (state)=>{
 
     return{
         timerStarted:state.timer.timerStarted,
-        pomodores:state.timer.pomodores
+        pomodores:state.timer.pomodores,
+        pie: state.timer.pie
     }
 }
 

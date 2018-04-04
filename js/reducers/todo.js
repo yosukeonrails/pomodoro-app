@@ -34,8 +34,6 @@ export default function todoReducer(state, action){
 
         case 'REMOVE_TODO':  
         
-        console.log('removing', action.index);
-
         return {
             ...state,
           todos: state.todos.filter( (element, index ) => index !== action.index)
