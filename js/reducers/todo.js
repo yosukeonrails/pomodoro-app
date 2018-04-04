@@ -1,6 +1,6 @@
 
 var action = require('../actions/index');
-import {ADD_TODO} from '../actions/index';
+import {ADD_TODO, REMOVE_TODO} from '../actions/index';
 
 let stateDefault = {
      todos:[]
@@ -16,17 +16,18 @@ export default function todoReducer(state, action){
 
         return {
             ...state,
-            todos:[...state.todos, action.data]
+            todos:[...state.todos,  action.data ]
         }
+        break;
 
         case 'REMOVE_TODO':  
-        console.log("REMOVING TODO")
+        
+        console.log('removing', action.index);
+
         return {
-            ...state,
-            todos: state.todos.splice( action.index , 1 )
+          todos: state.todos.filter( (element, index ) => index !== action.index)
         }
-
-
+        
         break;
     }
 

@@ -12,6 +12,7 @@ class TodoApp extends React.Component{
         this.handleInput = this.handleInput.bind(this);
         this.addTodo = this.addTodo.bind(this);
         this._handleKeyPress = this._handleKeyPress.bind(this);
+        this.removeTodo =  this.removeTodo.bind(this);
 
         this.state = {
             input:''
@@ -22,7 +23,7 @@ class TodoApp extends React.Component{
     _handleKeyPress(e){
        
         if (e.key === 'Enter') {
-            this.addTodo();
+            this.addTodo(this.state.input , false);
           }
     }
     
@@ -35,36 +36,37 @@ class TodoApp extends React.Component{
     }
 
     removeTodo(index){
-
+        console.log('deleting', index )
         this.props.dispatch(removeTodo(index)); 
 
     }
 
-    addTodo(){
+    addTodo(description, done , index){
+        
 
         let data ={
-             description:this.state.input,
-             done:false
+             description:description,
+             done:done
         }
 
-        this.props.dispatch(addTodo(data)); 
-        
-        this.setState({
+      this.props.dispatch(addTodo(data)); 
+              
+       this.setState({
             input:''
         })
     }
 
     checkTodo(index, done ){
         
-        
-
+    
     }
 
     render(){   
-        
+        console.log("AFtER REMOVING:")
+        console.log(this.props.todos)
         let todoList = this.props.todos.map((todo, i )=>{
             
-            return <Todo key={i} index={i} data={todo} removeTodo={this.removeTodo} checkTodo={this.checkTodo}/>
+            return <Todo key={i} index={i} data={todo} addTodo={this.addTodo} removeTodo={this.removeTodo} checkTodo={this.checkTodo}/>
         })
 
         return(
@@ -75,7 +77,7 @@ class TodoApp extends React.Component{
                         <div className="todoCreator">
 
                             <input  value={this.state.input} onKeyPress={this._handleKeyPress} onChange={(event)=>{ this.handleInput(event) }} ></input>
-                            <button  onClick={this.addTodo}>Add</button>
+                            <button  onClick={()=>{this.addTodo(this.state.input , false)}}>Add</button>
 
                         </div>
 

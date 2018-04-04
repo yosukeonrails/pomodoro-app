@@ -181,8 +181,7 @@ class TimeTracker extends React.Component{
 }
 
 var mapStateToProps = (state)=>{
-    console.log('here is state')
-    console.log(state);
+
     return{
         timerStarted:state.timer.timerStarted,
         pomodores:state.timer.pomodores
