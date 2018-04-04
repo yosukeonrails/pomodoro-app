@@ -54,8 +54,7 @@ class TimeTracker extends React.Component{
                 // if this.state.mode === 'done'
                 if(this.state.done){
 
-                   this.toggleTimer(false);
-
+                    this.resetTimer();
                     return 
                 }
 
@@ -98,7 +97,26 @@ class TimeTracker extends React.Component{
 
     }
 
+    resetTimer(sure){
+
+        clearInterval(this.timer)
+
+        this.setState({
+            timerRunning:false,
+            min:1,
+            sec:0,
+            pomodores:0,
+            mode:'work'
+        })
+
+        return 
+
+    }
+
+
+
     toggleTimer(start){
+        
 
         let dis =this;
 
@@ -108,7 +126,6 @@ class TimeTracker extends React.Component{
             100);
             
             this.setState({
-                min:1,
                 timerRunning:true
             })
 
@@ -117,9 +134,7 @@ class TimeTracker extends React.Component{
             clearInterval(this.timer)
 
             this.setState({
-                timerRunning:false,
-                min:0,
-                sec:0
+                timerRunning:false
             })
 
         }
@@ -150,7 +165,7 @@ class TimeTracker extends React.Component{
                     <div>
                         <button onClick={ ()=>{ this.toggleTimer(true) }} > Start </button>
                         <button onClick={ ()=>{ this.toggleTimer(false) }}  > Pause </button>
-                        <button> Reset </button>
+                        <button onClick={ ()=>{ this.resetTimer(false) }}  > Reset </button>
                     </div>
                
             </div>       
