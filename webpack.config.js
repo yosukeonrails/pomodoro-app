@@ -32,6 +32,11 @@ const config = {
                     noIeCompat:true
                 }
             }]
+        },
+        
+        {
+          test: /\.svg$/,
+          use: "file-loader",
         }
 
        

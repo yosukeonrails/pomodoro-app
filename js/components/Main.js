@@ -1,7 +1,9 @@
 const React = require('react');
 import {Switch} from 'react-router-dom'
+
 import TimerComponent from './Timer'
 import TodoAppComponent from './TodoApp'
+import TomatoTrackerComponent from './TomatoTracker'
 
 class Main extends React.Component{
 
@@ -9,7 +11,7 @@ class Main extends React.Component{
         return(
             <div>
                 <h1> Main Content </h1>
-                
+     
                 <div className="main-left" ><TimerComponent/></div>
                 <div className="main-right" > <TodoAppComponent/></div>
 

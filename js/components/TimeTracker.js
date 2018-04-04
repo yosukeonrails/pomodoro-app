@@ -1,7 +1,7 @@
 const React = require('react');
 let timer_style= require('../../css/timer.less'); // loading the timer css file
 import {connect} from 'react-redux';
-import {toggleTimer, updatePie} from '../actions'
+import {toggleTimer, updatePie, updatePomodoroInfo } from '../actions'
 
 class TimeTracker extends React.Component{
 
@@ -10,9 +10,9 @@ class TimeTracker extends React.Component{
 
         this.updateTime = this.updateTime.bind(this);
         this.giveBreak = this.giveBreak.bind(this);
-        console.log(this.props)
-        this.state= {
 
+        
+        this.state= {
             breakLength:this.props.data.breakLength,
             workLength:this.props.data.workLength,
             longBreakLength:this.props.data.longBreakLength,
@@ -20,22 +20,22 @@ class TimeTracker extends React.Component{
             min:this.props.data.workLength,
             sec:0,
             timerRunning:false,
-            breakMode:false,
             mode:'work',
             pomodores:0,
-            bigBreak:false,
             done:false
         }
+
 
     }   
 
     giveBreak(size){
 
         let min = (size==="small") ? this.state.breakLength : this.state.longBreakLength ;
-        let done = (size === "small") ? false : true;
+        let done = (size === "small") ? false : true;   
 
-        this.setState({ pomodores:this.state.pomodores+1})
-
+        this.setState({ pomodores:this.state.pomodores+1});
+ 
+        
         this.setState({
             min:min,
             sec:0,
@@ -46,7 +46,7 @@ class TimeTracker extends React.Component{
 
          // reset the pie chart
          this.props.dispatch(updatePie( {leftPie:100 , rightPie:100 } ));
-
+         this.props.dispatch( updatePomodoroInfo( { pomodores:this.state.pomodores, mode:this.state.mode } ));
     }
 
     updateTime(minute, second){
@@ -124,7 +124,7 @@ class TimeTracker extends React.Component{
 
                     // reset the pie chart
                     this.props.dispatch(updatePie( {leftPie:100 , rightPie:100 } ));
-
+                    this.props.dispatch( updatePomodoroInfo( { pomodores:this.state.pomodores, mode:this.state.mode } ));
 
                 } 
 
@@ -155,6 +155,10 @@ class TimeTracker extends React.Component{
             pomodores:0,
             mode:'work'
         })
+
+        // reset the pie chart
+        this.props.dispatch(updatePie( {leftPie:100 , rightPie:100 } ));
+        this.props.dispatch( updatePomodoroInfo( { pomodores:this.state.pomodores, mode:this.state.mode } ));
 
         return 
 

@@ -2,7 +2,8 @@ const React = require('react');
 
 let timer_style= require('../../css/timer.less'); // loading the timer css file
 import {connect} from 'react-redux';
-import TimeTracker from '../components/TimeTracker';
+import TimeTracker from './TimeTracker';
+import TomatoTrackerComponent from './TomatoTracker'
 
 let x = 350;
 let innerWidth = x - (x/5) + 'px';
@@ -75,7 +76,6 @@ class Timer extends React.Component{
         super(props);
 
         this.state={
-            
             breakLength:1,
             workLength:2,
             longBreakLength:15
@@ -98,13 +98,13 @@ class Timer extends React.Component{
         return(
  
             <div> 
-
+                       
+           <div className="main-top"><TomatoTrackerComponent/></div>
             <h1> Timer   </h1>
 
             <div className="timerContainer" style={styles.timerContainer}>
 
             <div className="timerBackground" style={ styles.timerBackground}></div>
-
 
                     <div style={ {...styles.hold , ...styles.pie_left}}><div  style={{...styles.pie,...styles.pie_left_rotation}}></div></div>
                     <div style={ {...styles.hold , ...styles.pie_right}}><div style={{...styles.pie,...styles.pie_right_rotation}}></div></div>

@@ -84,4 +84,19 @@ export function editTodo(index,description){
            }
         
 
+                   
+
+        export var UPDATE_POMODORO_INFO = 'UPDATE_POMODORO_INFO';
+
+        export function updatePomodoroInfo(data){
+        
+            return {
+              type:UPDATE_POMODORO_INFO,
+              data:data
+            }
+        
+           }
+        
+
+
 
