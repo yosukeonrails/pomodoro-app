@@ -10,7 +10,7 @@ class TimeTracker extends React.Component{
 
         this.updateTime = this.updateTime.bind(this);
         this.giveBreak = this.giveBreak.bind(this);
-        
+        console.log(this.props)
         this.state= {
 
             breakLength:this.props.data.breakLength,
@@ -42,7 +42,10 @@ class TimeTracker extends React.Component{
             mode:'short-break',
             currentLength:min,
             done:done
-        })
+        })  
+
+         // reset the pie chart
+         this.props.dispatch(updatePie( {leftPie:100 , rightPie:100 } ));
 
     }
 
@@ -51,9 +54,36 @@ class TimeTracker extends React.Component{
         let min= minute;
         let sec = second -1;
 
-        let pie = (this.props.pie - ( 1.66667*2 / this.state.currentLength ));
+        let leftPie;
+        let rightPie;
 
-        this.props.dispatch(updatePie(pie));
+        let getCoordinates = (p)=>{ 
+                let c= ( p - ( 1.66667*2 / this.state.currentLength )); 
+                return c
+             }   
+
+
+        if(this.props.pieCoordinates.leftPie <= 0 ){
+            
+            leftPie = 0;
+            rightPie = getCoordinates(this.props.pieCoordinates.rightPie)
+
+        }
+
+        else 
+
+        {   
+            rightPie= this.props.pieCoordinates.rightPie;
+            leftPie = getCoordinates(this.props.pieCoordinates.leftPie)
+        } 
+                
+        let pieCoordinates = {
+             leftPie:leftPie, 
+             rightPie:rightPie
+        }
+
+        this.props.dispatch(updatePie( pieCoordinates ));
+
         
         if(sec <= 0 ){
 
@@ -91,6 +121,11 @@ class TimeTracker extends React.Component{
                         mode:'work',
                         currentLength:this.state.workLength
                     })
+
+                    // reset the pie chart
+                    this.props.dispatch(updatePie( {leftPie:100 , rightPie:100 } ));
+
+
                 } 
 
                 return
@@ -198,7 +233,7 @@ var mapStateToProps = (state)=>{
     return{
         timerStarted:state.timer.timerStarted,
         pomodores:state.timer.pomodores,
-        pie: state.timer.pie
+        pieCoordinates: state.timer.pieCoordinates
     }
 }
 

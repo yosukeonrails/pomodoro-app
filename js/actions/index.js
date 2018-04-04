@@ -74,11 +74,11 @@ export function editTodo(index,description){
 
         export var UPDATE_PIE = 'UPDATE_PIE';
 
-        export function updatePie(pie){
+        export function updatePie(data){
         
             return {
               type:UPDATE_PIE,
-              pie:pie
+              pieCoordinates:data
             }
         
            }

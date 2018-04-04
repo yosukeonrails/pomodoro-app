@@ -7,7 +7,10 @@ let stateDefault = {
      pomodoros:0,
      break:0,
      breakTime:false,
-     pie:100
+     pieCoordinates:{    
+         leftPie:100,
+         rightPie:100
+     }
 }
 
 export default function timerReducer(state, action){
@@ -22,7 +25,7 @@ export default function timerReducer(state, action){
 
            
         case 'UPDATE_PIE':    
-        return {...state , pie:action.pie }
+        return {...state , pieCoordinates:action.pieCoordinates }
         break;
 
         

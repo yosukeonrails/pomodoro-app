@@ -20,7 +20,6 @@ let styles = {
     },
 
     "pie":{
-        "transition":"all 1s",
         "position":"absolute",
         "width":width,
         "height":width,
@@ -87,13 +86,17 @@ class Timer extends React.Component{
 
     render(){   
         //0.016666667
-        
-        let degrees1 =  (this.props.pie/100)*180  ;
-        styles.pie_left_rotation.transform = 'rotate('+degrees1+'deg)'
-        console.log(degrees1);
-        
+        let getDegree = p =>(p/100)*180
+
+        let left_degree =  getDegree(this.props.pieCoordinates.leftPie);
+        let right_degree =  getDegree(this.props.pieCoordinates.rightPie);
+
+        styles.pie_left_rotation.transform = 'rotate('+left_degree+'deg)';
+        styles.pie_right_rotation.transform = 'rotate('+right_degree+'deg)'
+     
 
         return(
+ 
             <div> 
 
             <h1> Timer   </h1>
@@ -123,7 +126,7 @@ var mapStateToProps = (state)=>{
 
     return{
         timer:state.timer.timerStarted,
-        pie:state.timer.pie    
+        pieCoordinates:state.timer.pieCoordinates   
     }   
 }
 
