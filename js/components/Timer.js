@@ -4,7 +4,7 @@ let timer_style= require('../../css/timer.less'); // loading the timer css file
 import {connect} from 'react-redux';
 import TimeTracker from '../components/TimeTracker';
 
-let x = 500;
+let x = 350;
 let innerWidth = x - (x/5) + 'px';
 let innerHalf =  (( x- (x/5)  ) / 2  )  + 'px'
 let width = x+'px';
@@ -12,11 +12,13 @@ let half =  (x/2) + 'px';
 let tracker_color= 'blue';
 let contentPosition = (x/10) +'px';
 
-const styles = {
+let styles = {
+
     timerContainer:{
         height:width,
         width: width
     },
+
     "pie":{
         "transition":"all 1s",
         "position":"absolute",
@@ -99,8 +101,8 @@ class Timer extends React.Component{
                     <div style={ {...styles.hold , ...styles.pie_right}}><div style={{...styles.pie,...styles.pie_right_rotation}}></div></div>
                 
                     <div className="innerCircle" style={styles.innerCircle} >
-                        <div className="content" style={styles.innerContent}>
-                         <TimeTracker/>
+                         <div className="content" style={styles.innerContent}>
+                           <TimeTracker x={x} innerWidth={innerWidth} half={half}/>
                         </div>
                     </div>
 

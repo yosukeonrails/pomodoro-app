@@ -143,29 +143,34 @@ class TimeTracker extends React.Component{
     }
 
     render(){
-
+     //   <div className="tracker_viwer">  <h1>{tag}</h1>  <h1>{this.state.pomodores}</h1></div>
+        console.log(this.props.x , this.props.innerWidth);
+        let fifth = (this.props.x / 5) + "px"; 
+        let tenth =  (this.props.x / 10) + "px"; 
+        let buttonStyle= { height:tenth, width: fifth};
+        let number_ems = (this.props.x * 0.014)+"em";
+        let h1Style={ fontSize:number_ems }
         let tag = (this.state.mode === "short-break") ? "Break Time" : "Work Time"
 
         return(
           <div> 
 
               
-            <div className="timeTracker">
-          <div className="tracker_viwer">  <h1>{tag}</h1>  <h1>{this.state.pomodores}</h1></div>
-                <div className="timeDisplay">
+       <div className="timeTracker" style= {{height:this.props.innerWidth, paddingTop:tenth }} >
+         
+                <div className="timeDisplay"  style= {{height:this.props.half, paddingTop:fifth}} >
 
-                        <div className="timerNumbers">
-                            <div className="timerTime" id="minutes" > <h1> {this.state.min} </h1></div>
-                            <div className="timerTime" id="colon" > <h1> : </h1></div>
-                            <div className="timerTime" id="seconds" > <h1> {this.state.sec} </h1></div>
+                        <div className="timerNumbers" style={{height:fifth}} >
+                            <div className="timerTime" id="minutes" > <h1 style={h1Style} > {this.state.min} </h1></div>
+                            <div className="timerTime" id="colon" > <h1 style={h1Style}> : </h1></div>
+                            <div className="timerTime" id="seconds" > <h1 style={h1Style}> {this.state.sec} </h1></div>
                         </div>
 
                 </div>
 
                     <div>
-                        <button onClick={ ()=>{ this.toggleTimer(true) }} > Start </button>
-                        <button onClick={ ()=>{ this.toggleTimer(false) }}  > Pause </button>
-                        <button onClick={ ()=>{ this.resetTimer(false) }}  > Reset </button>
+                        <button style={buttonStyle} onClick={ ()=>{ this.toggleTimer(true) }} > Start </button>
+                        <button   style={buttonStyle} onClick={ ()=>{ this.resetTimer(false) }}  > Reset </button>
                     </div>
                
             </div>       

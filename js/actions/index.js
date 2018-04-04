@@ -7,3 +7,28 @@ export function toggleTimer(start){
      timerStarted:start
  }
 }
+
+
+export var ADD_TODO = 'ADD_TODO';
+
+export function addTodo(data){
+
+    return {
+      type:ADD_TODO,
+      data:data
+    }
+
+   }
+
+
+
+export var REMOVE_TODO = 'REMOVE_TODO';
+
+export function removeTodo(index){
+
+    return {
+      type:REMOVE_TODO,
+      index:index
+    }
+
+   }
