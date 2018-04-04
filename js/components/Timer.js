@@ -1,6 +1,7 @@
 const React = require('react');
+let timer_style= require('../../css/index.less'); // loading the timer css file
+// let timer_style= require('../../css/timer.less'); // loading the timer css file
 
-let timer_style= require('../../css/timer.less'); // loading the timer css file
 import {connect} from 'react-redux';
 import TimeTracker from './TimeTracker';
 import TomatoTrackerComponent from './TomatoTracker'
@@ -76,19 +77,45 @@ class Timer extends React.Component{
     
     constructor(props){
         super(props);
+    
+        this.updateMessage = this.updateMessage.bind(this);
 
         this.state={
-            breakLength:5,
-            workLength:25,
-            longBreakLength:15
+            breakLength:2,
+            workLength:2,
+            longBreakLength:5,
+            message_animation:'',
+            message:'',
+            messageColor:'#ff5170b8'
         }
 
     }
 
+    updateMessage(mode){
+
+        let dis = this;
+    
+        let message= mode === 'short-break' ?  "It's break time!" : "It's crunch time!"; 
+        let messageColor= mode === 'short-break' ? "#21d2a1" : "#ff5170b8";
+
+    
+        this.setState({
+            message_animation:'fade-in',
+            messageColor:messageColor,
+            message:message
+        })
+
+
+        setTimeout(function(){ 
+            console.log('TIME OUT');
+            dis.setState({ message_animation:'fade-out' }) }, 1000);
+
+    }
 
     render(){   
         //0.016666667
         let getDegree = p =>(p/100)*180
+        console.log(this.state.message_animation)
 
         let left_degree =  getDegree(this.props.pieCoordinates.leftPie);
         let right_degree =  getDegree(this.props.pieCoordinates.rightPie);
@@ -100,8 +127,10 @@ class Timer extends React.Component{
         return(
  
             <div> 
-                       
-           <div className="main-top"><TomatoTrackerComponent/></div>
+                
+            <div className={"timer-message "+this.state.message_animation} style={{backgroundColor:this.state.messageColor}} > <h1> {this.state.message} </h1> </div>             
+            
+            <div className="main-top" ><TomatoTrackerComponent/></div>
     
             <div className="timerContainer" style={styles.timerContainer}>
 
@@ -112,7 +141,7 @@ class Timer extends React.Component{
                 
                     <div className="innerCircle" style={styles.innerCircle} >
                          <div className="content" style={styles.innerContent}>
-                           <TimeTracker data={this.state} x={x} innerWidth={innerWidth} half={half}/>
+                           <TimeTracker data={this.state} updateMessage={this.updateMessage} x={x} innerWidth={innerWidth} half={half}/>
                         </div>
                     </div>
 

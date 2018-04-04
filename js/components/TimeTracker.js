@@ -44,6 +44,7 @@ class TimeTracker extends React.Component{
         })  
 
          // reset the pie chart
+         this.props.updateMessage(this.state.mode);
          this.props.dispatch(updatePie( {leftPie:100 , rightPie:100 } ));
          this.props.dispatch( updatePomodoroInfo( { pomodores:this.state.pomodores, mode:this.state.mode } ));
     }
@@ -122,6 +123,7 @@ class TimeTracker extends React.Component{
                     })
 
                     // reset the pie chart
+                      this.props.updateMessage(this.state.mode);
                     this.props.dispatch(updatePie( {leftPie:100 , rightPie:100 } ));
                     this.props.dispatch( updatePomodoroInfo( { pomodores:this.state.pomodores, mode:this.state.mode } ));
 
@@ -172,6 +174,7 @@ class TimeTracker extends React.Component{
 
         if(start && !this.state.timerRunning ){
 
+            this.props.updateMessage(this.state.mode);
             this.timer= setInterval(function(){ dis.updateTime(dis.state.min, dis.state.sec) },
             1000);
             
@@ -195,7 +198,7 @@ class TimeTracker extends React.Component{
     render(){
         
         // Making sure that the digits are always 2 
-        
+
         let min_view= this.state.min.toString();
         min_view = min_view.length === 1 ? "0" + min_view  : min_view;
 
@@ -227,7 +230,7 @@ class TimeTracker extends React.Component{
                 </div>
 
                     <div>
-                        <button style={buttonStyle} onClick={ ()=>{ this.toggleTimer(true) }} > Start </button>
+                        <button   style={buttonStyle} onClick={ ()=>{ this.toggleTimer(true) }} > Start </button>
                         <button   style={buttonStyle} onClick={ ()=>{ this.resetTimer(false) }}  > Reset </button>
                     </div>
                
