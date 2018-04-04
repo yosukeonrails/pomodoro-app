@@ -10,38 +10,32 @@ class Todo extends React.Component{
         this.checkTodo = this.checkTodo.bind(this);
 
         this.state = {
-             description: this.props.data.description,
-             done:this.props.data.done
+             description: this.props.data.description
         }
 
     }
 
+
     handleEdit(e){
 
-        this.setState({
-             description: e.target.value
-        })
+        this.props.editTodo(this.props.index, e.target.value);
+
         // edit by key 
     }
 
     checkTodo(e){
-
-       
+        
         e.preventDefault();
 
-        if(e.target === e.currentTarget) {
-            console.log("CHECKING?")
-            if(!this.state.done){
+        if(e.target === e.currentTarget){
+            
+            let checked = this.props.data.done ? false : true;
 
-                this.props.addTodo(this.props.data.description , true , this.props.index); 
-                this.props.removeTodo(this.props.index);
-                
-           } else {
-   
-               this.props.addTodo(this.props.data.description , false); 
-           }
+            this.props.addTodo(this.props.data.description , checked, this.props.index); 
+            this.props.removeTodo(this.props.index);
 
         }
+
 
     }
 
@@ -59,7 +53,7 @@ class Todo extends React.Component{
             <div onClick={(event)=>{this.checkTodo(event)} } style={{backgroundColor:todoColor}} className="todoComponent">
                 
                 <div className="todo-description"> <input 
-                onChange={(event)=>{this.handleEdit(event)}} value={this.props.data.description} ></input> </div>
+                onChange={(event)=>{this.handleEdit(event)}}  value={this.props.data.description } ></input> </div>
 
                 <div className="todo-buttons"> 
                 <button onClick={()=>{ this.removeTodo(this.props.index) }}> <i className="material-icons">delete</i>  </button>

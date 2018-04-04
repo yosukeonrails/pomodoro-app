@@ -30,5 +30,47 @@ export function removeTodo(index){
       type:REMOVE_TODO,
       index:index
     }
+   }
+
+
+export var EDIT_TODO = 'EDIT_TODO';
+
+export function editTodo(index,description){
+
+    return {
+      type:EDIT_TODO,
+        index:index,
+        description:description
+    }
 
    }
+
+   export var ADD_TO_DONE = 'ADD_TO_DONE';
+
+   export function addToDone(data){
+   
+       return {
+         type:ADD_TO_DONE,
+         data:data
+       }
+   
+      }
+   
+   
+
+
+    export var UPDATE_TODO = 'UPDATE_TODO';
+
+    export function updateTodo(list){
+
+        return {
+
+            type:UPDATE_TODO,
+                list:list
+            }
+
+        }
+        
+
+
+

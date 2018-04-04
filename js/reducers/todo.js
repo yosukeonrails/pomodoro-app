@@ -1,9 +1,11 @@
 
 var action = require('../actions/index');
-import {ADD_TODO, REMOVE_TODO} from '../actions/index';
+import {ADD_TODO, REMOVE_TODO, EDIT_TODO, ADD_TO_DONE, UPDATE_TODO} from '../actions/index';
 
 let stateDefault = {
-     todos:[]
+     todos:[],
+     done_todos:[],
+     other:[]
 }
 
 export default function todoReducer(state, action){
@@ -20,15 +22,48 @@ export default function todoReducer(state, action){
         }
         break;
 
+        
+        case 'UPDATE_TODO':  
+
+        return {
+            ...state,
+            todos:action.list
+        }
+        break;
+
+
         case 'REMOVE_TODO':  
         
         console.log('removing', action.index);
 
         return {
+            ...state,
           todos: state.todos.filter( (element, index ) => index !== action.index)
         }
-        
+
         break;
+
+
+        case 'EDIT_TODO':  
+
+        return {
+
+          todos: state.todos.filter( (element, index ) =>{ 
+              
+            let todo = element;
+                
+                if(index === action.index){
+                    todo.description = action.description
+                }
+
+             return todo
+
+          })
+        }
+
+        break;
+
+
     }
 
     return {...state}
