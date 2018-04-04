@@ -10,14 +10,14 @@ let innerWidth = x - (x/5) + 'px';
 let innerHalf =  (( x- (x/5)  ) / 2  )  + 'px'
 let width = x+'px';
 let half =  (x/2) + 'px';
-let tracker_color= 'blue';
+let tracker_color= 'rgb(25, 173, 220)';
 let contentPosition = (x/10) +'px';
 
 let styles = {
 
     timerContainer:{
         height:width,
-        width: width
+        width: width,
     },
 
     "pie":{
@@ -59,11 +59,13 @@ let styles = {
     },
     pie_left_rotation:{
         transform: 'rotate(150deg)',
-        backgroundColor:tracker_color
+        backgroundColor:tracker_color,
+        transition: "1s",
     },
     pie_right_rotation:{
         transform: 'rotate(180deg)',
-        backgroundColor:tracker_color
+        backgroundColor:tracker_color,
+        transition: "1s",
     },
 
     
@@ -76,8 +78,8 @@ class Timer extends React.Component{
         super(props);
 
         this.state={
-            breakLength:1,
-            workLength:2,
+            breakLength:5,
+            workLength:25,
             longBreakLength:15
         }
 
@@ -100,8 +102,7 @@ class Timer extends React.Component{
             <div> 
                        
            <div className="main-top"><TomatoTrackerComponent/></div>
-            <h1> Timer   </h1>
-
+    
             <div className="timerContainer" style={styles.timerContainer}>
 
             <div className="timerBackground" style={ styles.timerBackground}></div>

@@ -45,7 +45,7 @@ export default function todoReducer(state, action){
         case 'EDIT_TODO':  
 
         return {
-
+        ...state,
           todos: state.todos.filter( (element, index ) =>{ 
               
             let todo = element;

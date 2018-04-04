@@ -4,8 +4,42 @@
 }
 
 h1{
-    color:green
+    color: #505050;
 }
+
+body{
+    margin: 0;
+  
+}
+// HEADER
+
+.header-container{
+
+    width: 100%;
+    height: 60px;
+    background-color: #3c3c3c;
+    padding-top: 10px;
+    padding-left: 20px;
+    box-sizing: border-box;
+
+    h1{
+        margin: 0;
+        padding: 0;
+        color: white;
+        float: left;
+        width: 220px;
+    }
+}
+
+.header-tomato-icon {
+    background-image: url("../assets/tomato_icon.svg");
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    float: left;
+ }
+
+
 
 .main-left{
     width: 60%;
@@ -17,32 +51,4 @@ h1{
     float: left;
 }
 
-.todoCreator{
-     height: 100px;
-     background-color: green;
-}
 
-.todoComponent{
-    background-color: yellow;
-    height: 80px;
-    p{
-        text-align: center
-    }
-    &:hover{
-        cursor: pointer;
-    }
-}
-
-.todo-description {
-width: 80%;
-float: left;
-input{
-    width: 100%;
-}
-
-}
-
-.todo-buttons{
-    width: 20%;
-    float: left;
-    }

@@ -173,7 +173,7 @@ class TimeTracker extends React.Component{
         if(start && !this.state.timerRunning ){
 
             this.timer= setInterval(function(){ dis.updateTime(dis.state.min, dis.state.sec) },
-            100);
+            1000);
             
             this.setState({
                 timerRunning:true
@@ -193,7 +193,9 @@ class TimeTracker extends React.Component{
     }
 
     render(){
-     //   <div className="tracker_viwer">  <h1>{tag}</h1>  <h1>{this.state.pomodores}</h1></div>
+        
+        // Making sure that the digits are always 2 
+        
         let min_view= this.state.min.toString();
         min_view = min_view.length === 1 ? "0" + min_view  : min_view;
 
@@ -214,7 +216,7 @@ class TimeTracker extends React.Component{
               
        <div className="timeTracker" style= {{height:this.props.innerWidth, paddingTop:tenth }} >
          
-                <div className="timeDisplay"  style= {{height:this.props.half, paddingTop:fifth}} >
+                <div className="timeDisplay"  style= {{height:this.props.half, paddingTop:tenth}} >
 
                         <div className="timerNumbers" style={{height:fifth}} >
                             <div className="timerTime" id="minutes" > <h1 style={h1Style} > {min_view} </h1></div>

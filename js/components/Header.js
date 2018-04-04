@@ -6,8 +6,8 @@ class Header extends React.Component{
 
     render(){
         return(
-            <div> 
-                    <h1> Header </h1>
+            <div className="header-container"> 
+                    <h1> TomatoTracker </h1> <div className="header-tomato-icon"></div>
           </div>
         )
     }
