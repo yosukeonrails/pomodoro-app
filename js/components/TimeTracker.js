@@ -25,7 +25,6 @@ class TimeTracker extends React.Component{
             done:false
         }
 
-
     }   
 
     giveBreak(size){
@@ -195,6 +194,11 @@ class TimeTracker extends React.Component{
 
     render(){
      //   <div className="tracker_viwer">  <h1>{tag}</h1>  <h1>{this.state.pomodores}</h1></div>
+        let min_view= this.state.min.toString();
+        min_view = min_view.length === 1 ? "0" + min_view  : min_view;
+
+        let sec_view= this.state.sec.toString();
+        sec_view = sec_view.length === 1 ? "0" + sec_view  : sec_view;
 
 
         let fifth = (this.props.x / 5) + "px"; 
@@ -213,9 +217,9 @@ class TimeTracker extends React.Component{
                 <div className="timeDisplay"  style= {{height:this.props.half, paddingTop:fifth}} >
 
                         <div className="timerNumbers" style={{height:fifth}} >
-                            <div className="timerTime" id="minutes" > <h1 style={h1Style} > {this.state.min} </h1></div>
+                            <div className="timerTime" id="minutes" > <h1 style={h1Style} > {min_view} </h1></div>
                             <div className="timerTime" id="colon" > <h1 style={h1Style}> : </h1></div>
-                            <div className="timerTime" id="seconds" > <h1 style={h1Style}> {this.state.sec} </h1></div>
+                            <div className="timerTime" id="seconds" > <h1 style={h1Style}> {sec_view} </h1></div>
                         </div>
 
                 </div>

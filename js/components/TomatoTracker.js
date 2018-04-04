@@ -11,9 +11,10 @@ class TomatoTracker extends React.Component{
         
     }
 
-
     render(){   
         
+        // let bar_width
+
         let tomato_array =[];
         
         for( let i =0 ; i < this.props.pomodoroInfo.pomodores ; i ++){
@@ -23,20 +24,27 @@ class TomatoTracker extends React.Component{
 
         return(
          <div className="tomato-tracker-container">
+
              <div style={{position:'absolute'}} className="tomato-container"> 
         
             {tomato_array}
 
             </div>
 
-            <div    className="tomato-container"> 
+            <div className="tomato-container"> 
 
-            <Tomato color="gray"/>
-            <Tomato color="gray"/>
-            <Tomato color="gray"/>
-            <Tomato color="gray"/>
+                <Tomato color="gray"/>
+                <Tomato color="gray"/>
+                <Tomato color="gray"/>
+                <Tomato color="gray"/>
 
             </div>
+
+            {/* <div className="tomato-bar-container">
+                <div className="tomato-bar"> </div>
+            </div> */}
+
+            
 
          </div>
         )
