@@ -1,7 +1,7 @@
 {
-  "name": "biblog-app",
+  "name": "pomodoro-app",
   "version": "1.0.0",
-  "description": "An app the let's user share their bible study content.",
+  "description": "An app that let's you easily practice the Pomodoro Technique",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
