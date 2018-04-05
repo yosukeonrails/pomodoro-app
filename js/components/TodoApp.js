@@ -23,6 +23,12 @@ class TodoApp extends React.Component{
         
     }
 
+    componentWillMount(){
+
+        
+    }
+
+
     _handleKeyPress(e){
        
         if (e.key === 'Enter') {
@@ -107,7 +113,7 @@ class TodoApp extends React.Component{
      // Everytime a todo is removed or added it sorts until state.sorted if true
 
        if(!this.state.sorted){
-             this.sortTodos();
+        this.sortTodos();
        }
 
         let todoList = this.props.todos.map((todo, i )=>{

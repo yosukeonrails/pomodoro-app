@@ -10,7 +10,7 @@ class Main extends React.Component{
 
         return(
 
-            <div>     
+            <div className="main">     
                 <div className="main-left" ><TimerComponent/></div>
                 <div className="main-right" ><TodoAppComponent/></div>
             </div>
