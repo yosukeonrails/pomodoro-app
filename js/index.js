@@ -25,11 +25,11 @@ class App extends React.Component{
 
 
 ReactDOM.render(
-  <HashRouter>
-    <Provider store={store} >
-    <App />
-    </Provider>
-  </HashRouter>
+    <HashRouter>
+      <Provider store={store} >
+      <App />
+      </Provider>
+    </HashRouter>
 ,
 document.getElementById('root')
 )

@@ -3,7 +3,7 @@ var action = require('../actions/index');
 import {ADD_TODO, REMOVE_TODO, EDIT_TODO, ADD_TO_DONE, UPDATE_TODO} from '../actions/index';
 
 let stateDefault = {
-     todos:[],
+     todos:[{description:"Make some coffee", done:false} , {description:"Add a Todo to the List", done:false} , {description:"Visit TomatoTracker", done:true}   ],
      done_todos:[],
      other:[]
 }

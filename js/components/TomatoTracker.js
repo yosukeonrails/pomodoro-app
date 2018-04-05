@@ -40,12 +40,6 @@ class TomatoTracker extends React.Component{
 
             </div>
 
-            {/* <div className="tomato-bar-container">
-                <div className="tomato-bar"> </div>
-            </div> */}
-
-            
-
          </div>
         )
 

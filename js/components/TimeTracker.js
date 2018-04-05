@@ -14,6 +14,7 @@ class TimeTracker extends React.Component{
 
         
         this.state= {
+
             breakLength:this.props.data.breakLength,
             workLength:this.props.data.workLength,
             longBreakLength:this.props.data.longBreakLength,
@@ -24,6 +25,7 @@ class TimeTracker extends React.Component{
             mode:'work',
             pomodores:0,
             done:false
+
         }
 
     }   
@@ -58,11 +60,13 @@ class TimeTracker extends React.Component{
         let leftPie;
         let rightPie;
 
+
+        // Here it calculates the degrees it needs to rotate 
+        
         let getCoordinates = (p)=>{ 
                 let c= ( p - ( 1.66667*2 / this.state.currentLength )); 
                 return c
              }   
-
 
         if(this.props.pieCoordinates.leftPie <= 0 ){
             
@@ -83,24 +87,28 @@ class TimeTracker extends React.Component{
              rightPie:rightPie
         }
 
+
         this.props.dispatch(updatePie( pieCoordinates ));
 
-        
+        /// Here it creates the clock functionality.
+        // if sec is -1 then minute is -1 and sec is 59
         if(sec <= 0 ){
 
             min = min -1;       
             sec = 59;
 
+            // if minute is less then 0, then the time is over
+
             if( min < 0  ){
                 
-                // if this.state.mode === 'done'
-                if(this.state.done){
+                // stops the timer and resets if done is true
 
+                if(this.state.done){
                     this.resetTimer();
                     return 
                 }
 
-                // if this is not a break
+                // if time is over and the more is work , then give break
                 if(this.state.mode === 'work'){
                 
                     if(this.state.pomodores >= 3 ){
@@ -111,10 +119,11 @@ class TimeTracker extends React.Component{
                     } else {
                         this.giveBreak("small");
                     }
-                    
+
+                 
                 } else {
 
-                     // if this is a break then go" back to work 
+                 // or go back to work after a break 
 
                     this.setState({
                         min:this.state.workLength,
@@ -124,7 +133,7 @@ class TimeTracker extends React.Component{
                     })
 
                     // reset the pie chart
-                      this.props.updateMessage(this.state.mode);
+                    this.props.updateMessage(this.state.mode);
                     this.props.dispatch(updatePie( {leftPie:100 , rightPie:100 } ));
                     this.props.dispatch( updatePomodoroInfo( { pomodores:this.state.pomodores, mode:this.state.mode } ));
 
@@ -140,10 +149,6 @@ class TimeTracker extends React.Component{
             min:min
         })
         
-    }
-
-    componentDidUpdate(){
-
     }
 
     resetTimer(sure){
@@ -169,9 +174,10 @@ class TimeTracker extends React.Component{
 
 
     toggleTimer(start){
-        
 
         let dis =this;
+
+        // if the timer is not running yet, begin 
 
         if(start && !this.state.timerRunning ){
 
@@ -184,6 +190,8 @@ class TimeTracker extends React.Component{
             })
 
         } else{
+        
+        // if timer is already running , clear the timer and pause it
 
             clearInterval(this.timer)
 
@@ -198,7 +206,7 @@ class TimeTracker extends React.Component{
 
     render(){
         
-        // Making sure that the digits are always 2 
+        // Making sure that the min and sec are always 2 digits
 
         let min_view= this.state.min.toString();
         min_view = min_view.length === 1 ? "0" + min_view  : min_view;
@@ -206,45 +214,46 @@ class TimeTracker extends React.Component{
         let sec_view= this.state.sec.toString();
         sec_view = sec_view.length === 1 ? "0" + sec_view  : sec_view;
 
-        // replace this with a function returning with px 
+        // Some adjustable styles with "x" width coming from parent component
+
         let fifth = (this.props.x / 5) + "px"; 
         let tenth =  (this.props.x / 10) + "px"; 
         let two= ( (this.props.x / 5)/2 ) + "px";
-
-        
-        let start_button = !this.state.timerRunning ? 'Start' : 'Pause';
         let buttonStyle= { height:tenth, width: fifth};
         let number_ems = (this.props.x * 0.014)+"em";
-        let h1Style={ fontSize:number_ems }
-        let tag = (this.state.mode === "short-break") ? "Break Time" : "Work Time"
+        let h1Style={ fontSize:number_ems };
+
+        // Define the right text if its "Start" or "Pause"
+        let start_button = !this.state.timerRunning ? 'Start' : 'Pause';
+        // let tag = (this.state.mode === "short-break") ? "Break Time" : "Work Time";
 
         return(
-          <div> 
+                <div> 
+                    <div className="timeTracker" style= {{height:this.props.innerWidth, paddingTop:tenth }} >
 
-              
-       <div className="timeTracker" style= {{height:this.props.innerWidth, paddingTop:tenth }} >
-         
-                <div className="timeDisplay"  style= {{height:this.props.half, paddingTop:two}} >
+                            <div className="timeDisplay"  style= {{height:this.props.half, paddingTop:two}} >
 
-                        <div className="timerNumbers" style={{height:fifth}} >
-                            <div className="timerTime" id="minutes" > <h1 style={h1Style} > {min_view} </h1></div>
-                            <div className="timerTime" id="colon" > <h1 style={h1Style}> : </h1></div>
-                            <div className="timerTime" id="seconds" > <h1 style={h1Style}> {sec_view} </h1></div>
+                                    <div className="timerNumbers" style={{height:fifth}} >
 
-                            <div className="timeLabel" >
-                                <h1>min</h1><h1>sec</h1>
+                                        <div className="timerTime" id="minutes" > <h1 style={h1Style} > {min_view} </h1></div>
+                                        <div className="timerTime" id="colon" > <h1 style={h1Style}> : </h1></div>
+                                        <div className="timerTime" id="seconds" > <h1 style={h1Style}> {sec_view} </h1></div>
+
+                                        <div className="timeLabel" >
+                                            <h1>min</h1><h1>sec</h1>
+                                        </div>
+                                        
+                                    </div>
+
                             </div>
-                        </div>
 
+                            <div>
+                                <button   style={buttonStyle} onClick={ ()=>{ this.toggleTimer(true) }} > {start_button} </button>
+                                <button   style={buttonStyle} onClick={ ()=>{ this.resetTimer(false) }}  > Reset </button>
+                            </div>
+
+                    </div>       
                 </div>
-
-                    <div>
-                        <button   style={buttonStyle} onClick={ ()=>{ this.toggleTimer(true) }} > {start_button} </button>
-                        <button   style={buttonStyle} onClick={ ()=>{ this.resetTimer(false) }}  > Reset </button>
-                    </div>
-               
-            </div>       
-          </div>
         )
     }
 

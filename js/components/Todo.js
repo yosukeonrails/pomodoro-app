@@ -9,7 +9,6 @@ class Todo extends React.Component{
 
         this.removeTodo = this.removeTodo.bind(this);
         this.checkTodo = this.checkTodo.bind(this);
-        this.hoverTodo = this.hoverTodo.bind(this);
 
         this.state = {
 
@@ -21,26 +20,6 @@ class Todo extends React.Component{
     }
  
 
-    hoverTodo(e , on){
-
-        e.preventDefault();
-
-        let todo_color;
-      
-
-            if(on){
-            todo_color = this.props.data.done ?  'unchecked-todo' : 'checked-todo';
-            } else{
-                todo_color = "";
-            }
-                 
-     
-        this.setState({
-            todo_hover_style:todo_color
-        });
-
-    }
-
     handleEdit(e){
 
         this.props.editTodo(this.props.index, e.target.value);
@@ -50,20 +29,19 @@ class Todo extends React.Component{
 
     checkTodo(e){
         
-        console.log(e.target.id);
-        if(e.target.id === "delete-button"){ return };
+            if(e.target.id === "delete-button"){ return };
 
             let checked = this.props.data.done ? false : true;
 
             this.props.addTodo(this.props.data.description , checked, this.props.index); 
+
             this.props.removeTodo(this.props.index);
 
-
-    }
+        }
 
     removeTodo(index){
 
-        this.props.removeTodo(index);
+             this.props.removeTodo(index);
 
     }
 
@@ -75,23 +53,18 @@ class Todo extends React.Component{
         
         return (
             <div>
-            <div    id="todo-description"   style={{backgroundColor:todoColor}} onClick={(event)=>{this.checkTodo(event)} } className="todoComponent">
-        
-                
-                <div className="todo-description"> 
+                <div id="todo-description" style={{backgroundColor:todoColor}} onClick={(event)=>{this.checkTodo(event)} } className="todoComponent">
+                        
+                        <div className="todo-description"> 
+                            {todoDescription}
+                        </div>
 
-                {/* <input onChange={(event)=>{this.handleEdit(event)}}  value={this.props.data.description } ></input>  */}
-                {todoDescription}
-
+                        <div className="todo-buttons"> 
+                            <button  id="delete-button" onClick={()=>{ this.removeTodo(this.props.index) }}> <i id="delete-button" className="material-icons">delete</i>  </button>
+                        </div>  
+                                        
                 </div>
 
-
-                <div className="todo-buttons"> 
-                <button  id="delete-button" onClick={()=>{ this.removeTodo(this.props.index) }}> <i id="delete-button" className="material-icons">delete</i>  </button>
-              
-                </div>
-            </div>
-         
             </div>
          )
        

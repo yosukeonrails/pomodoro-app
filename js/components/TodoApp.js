@@ -51,6 +51,8 @@ class TodoApp extends React.Component{
     }
 
     sortTodos(){
+        
+        // Sort todos so that removed ones are in the bottom
 
         let done= [];
         let notDone= [];
@@ -101,13 +103,14 @@ class TodoApp extends React.Component{
     }
 
     render(){   
-         
+    
+     // Everytime a todo is removed or added it sorts until state.sorted if true
+
        if(!this.state.sorted){
-           this.sortTodos();
+             this.sortTodos();
        }
 
         let todoList = this.props.todos.map((todo, i )=>{
-            
             return <Todo key={i} index={i} data={todo} editTodo={this.editTodo} addTodo={this.addTodo} removeTodo={this.removeTodo} checkTodo={this.checkTodo}/>
         })
 
@@ -115,30 +118,27 @@ class TodoApp extends React.Component{
             return <Todo key={i} index={i} data={todo} editTodo={this.editTodo} addTodo={this.addTodo} removeTodo={this.removeTodo} checkTodo={this.checkTodo}/>
         })
 
+        
         return(
             <div> 
+                <div className="todoContainer">
 
-                  <div className="todoContainer">
-                        
-                        <div className="todoCreator">
+                    <div className="todoCreator">
                         <h1> Todo List </h1>
-                            <div>  <input  value={this.state.input} onKeyPress={this._handleKeyPress} onChange={(event)=>{ this.handleInput(event) }} ></input></div>
+                            <div> <input  value={this.state.input} onKeyPress={this._handleKeyPress} onChange={(event)=>{ this.handleInput(event) }} ></input></div>
+                            <div> <button  onClick={()=>{this.addTodo(this.state.input , false)}}>Add</button>  </div> 
+                    </div>
 
-                            <div>  <button  onClick={()=>{this.addTodo(this.state.input , false)}}>Add</button>  </div> 
+                    <div className="todoList">
+                        {todoList}
+                    </div>
 
-                        </div>
+                    <div className="todoList">
+                        {doneList}
+                    </div>
 
-                        <div className="todoList">
-                            {todoList}
-                        </div>
-
-                        <div className="todoList">
-                            {doneList}
-                        </div>
-
-
-                        <div></div>
-                  </div>
+                              <div></div>
+                </div>
            </div>
         )
 

@@ -1,5 +1,4 @@
 const React = require('react');
-import { BrowserRouter , Route , Link , NavLink , HashRouter, Switch} from 'react-router-dom'
 import {connect} from 'react-redux';
 
 class Header extends React.Component{
@@ -15,9 +14,11 @@ class Header extends React.Component{
 }
 
 var mapStateToProps = (state)=>{
+    
     return{
         todos:state.todo.todos    
     }
+
 }
 
 var HeaderComponent = connect(mapStateToProps)(Header)
