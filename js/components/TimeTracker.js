@@ -157,7 +157,7 @@ class TimeTracker extends React.Component{
 
         this.setState({
             timerRunning:false,
-            min:1,
+            min:25,
             sec:0,
             pomodores:0,
             mode:'work'
