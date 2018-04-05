@@ -61,7 +61,7 @@ By [Yosuke Hishinuma](mailto:yosukeonrails@gmail.com)
 
    ## The Process
 
-   The first step in creating this application was to create a mock wireframe which consisted mostly of scribbles on paper. After much brainstorming and putting all my creativity on paper, the challenge now was to bring the imagination into code. Whiteboarded solutions to all the functionality and one by one developed the components that make up the TomatoTracker app. 
+   The first step in creating this application was to create a mock wireframe which consisted mostly of scribbles on paper. After much brainstorming and putting all my creativity on paper, the challenge now was to bring the imagination into code. White-boarded solutions to all the functionality and one by one developed the components that make up the TomatoTracker app. 
 
    ## How it works?
 
@@ -87,7 +87,7 @@ By [Yosuke Hishinuma](mailto:yosukeonrails@gmail.com)
 
    ### `TomatoTracker`
 
-    The `TomatoTracker` sits right on top of the TimeTracker's progress tag. It consists of 4 gray tomatoes in a rectangular box. You might not notice right away, but as you start completing those pomodoros, the gray tomato suddenly will turn red, showing how many pomodoros you have completed! How convinient! 
+    The `TomatoTracker` sits right on top of the TimeTracker's progress tag. It consists of 4 gray tomatoes in a rectangular box. You might not notice right away, but as you start completing those pomodoros, the gray tomato suddenly will turn red, showing how many pomodoros you have completed! How convenient! 
 
 
    
