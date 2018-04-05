@@ -4,6 +4,10 @@
       margin-right: auto;
   }
   
+  button:focus {outline:0;}
+  button:hover{
+    cursor: pointer;
+  }
   .timerContainer {
     height: 150px;
     width:200px;
@@ -59,10 +63,11 @@
      /* Degreasing here from 180 to 0*/
   }
 
+ 
+
   .timerNumbers{
     margin-left: auto;
     margin-right: auto;
-    background-color: whitesmoke;
     height: 100px;
     h1{
         font-size: 7em;
@@ -71,6 +76,17 @@
         padding: 0;
         text-align: center
     }
+
+    .timeLabel{
+      h1{
+        font-size: 25px;
+        text-align: center;
+        width: 50%;
+        float: left;
+        font-family: 'Oswald', sans-serif;
+      }
+    } 
+
   
   }
   
@@ -79,6 +95,7 @@
     width: 33%;
     h1{
         font-family: 'Oswald', sans-serif;
+        height: 85px;
     }
   }
 
@@ -100,8 +117,10 @@
     box-sizing: border-box;
     
     button{
-        height: 50px;
-        width: 100px;
+      background-color: #20a94a;
+      font-size: 16px;
+      color: white;
+      border: 1px solid #e4e4e4;
     }
 
   }
@@ -114,6 +133,7 @@
     margin-left: auto;
     margin-right: auto;
     .centralize
+
   
 }
 

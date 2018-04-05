@@ -1,5 +1,6 @@
 const React = require('react');
 let timer_style= require('../../css/timer.less'); // loading the timer css file
+
 import {connect} from 'react-redux';
 import {toggleTimer, updatePie, updatePomodoroInfo } from '../actions'
 
@@ -205,9 +206,13 @@ class TimeTracker extends React.Component{
         let sec_view= this.state.sec.toString();
         sec_view = sec_view.length === 1 ? "0" + sec_view  : sec_view;
 
-
+        // replace this with a function returning with px 
         let fifth = (this.props.x / 5) + "px"; 
         let tenth =  (this.props.x / 10) + "px"; 
+        let two= ( (this.props.x / 5)/2 ) + "px";
+
+        
+        let start_button = !this.state.timerRunning ? 'Start' : 'Pause';
         let buttonStyle= { height:tenth, width: fifth};
         let number_ems = (this.props.x * 0.014)+"em";
         let h1Style={ fontSize:number_ems }
@@ -219,18 +224,22 @@ class TimeTracker extends React.Component{
               
        <div className="timeTracker" style= {{height:this.props.innerWidth, paddingTop:tenth }} >
          
-                <div className="timeDisplay"  style= {{height:this.props.half, paddingTop:tenth}} >
+                <div className="timeDisplay"  style= {{height:this.props.half, paddingTop:two}} >
 
                         <div className="timerNumbers" style={{height:fifth}} >
                             <div className="timerTime" id="minutes" > <h1 style={h1Style} > {min_view} </h1></div>
                             <div className="timerTime" id="colon" > <h1 style={h1Style}> : </h1></div>
                             <div className="timerTime" id="seconds" > <h1 style={h1Style}> {sec_view} </h1></div>
+
+                            <div className="timeLabel" >
+                                <h1>min</h1><h1>sec</h1>
+                            </div>
                         </div>
 
                 </div>
 
                     <div>
-                        <button   style={buttonStyle} onClick={ ()=>{ this.toggleTimer(true) }} > Start </button>
+                        <button   style={buttonStyle} onClick={ ()=>{ this.toggleTimer(true) }} > {start_button} </button>
                         <button   style={buttonStyle} onClick={ ()=>{ this.resetTimer(false) }}  > Reset </button>
                     </div>
                

@@ -81,8 +81,8 @@ class Timer extends React.Component{
         this.updateMessage = this.updateMessage.bind(this);
 
         this.state={
-            breakLength:2,
-            workLength:2,
+            breakLength:1,
+            workLength:1,
             longBreakLength:5,
             message_animation:'',
             message:'',
@@ -96,7 +96,7 @@ class Timer extends React.Component{
         let dis = this;
     
         let message= mode === 'short-break' ?  "It's break time!" : "It's crunch time!"; 
-        let messageColor= mode === 'short-break' ? "#21d2a1" : "#ff5170b8";
+        let messageColor= mode === 'short-break' ? "#22bb8a94" : "#ff5170b8";
 
     
         this.setState({
@@ -140,9 +140,11 @@ class Timer extends React.Component{
                     <div style={ {...styles.hold , ...styles.pie_right}}><div style={{...styles.pie,...styles.pie_right_rotation}}></div></div>
                 
                     <div className="innerCircle" style={styles.innerCircle} >
-                         <div className="content" style={styles.innerContent}>
-                           <TimeTracker data={this.state} updateMessage={this.updateMessage} x={x} innerWidth={innerWidth} half={half}/>
-                        </div>
+
+                            <div className="content" style={styles.innerContent}>
+                            <TimeTracker data={this.state} updateMessage={this.updateMessage} x={x} innerWidth={innerWidth} half={half}/>
+                            </div>
+                            
                     </div>
 
             </div>
