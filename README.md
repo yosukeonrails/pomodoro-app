@@ -42,13 +42,13 @@ By [Yosuke Hishinuma](mailto:yosukeonrails@gmail.com)
 
    ## Technologies and Dependancies 
     
-    React
-    Redux
-    React-Router 4
-    LESS/CSS
-    NODE/EXPRESS
-    Webpack
-    ES6
+    * React
+    * Redux
+    * React-Router 4
+    * LESS/CSS
+    * NODE/EXPRESS
+    * Webpack
+    * ES6
 
    ## Problem
 
