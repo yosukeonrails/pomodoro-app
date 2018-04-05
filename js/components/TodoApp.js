@@ -119,9 +119,9 @@ class TodoApp extends React.Component{
             <div> 
 
                   <div className="todoContainer">
-
-                        <div className="todoCreator">
                         
+                        <div className="todoCreator">
+                        <h1> Todo List </h1>
                             <div>  <input  value={this.state.input} onKeyPress={this._handleKeyPress} onChange={(event)=>{ this.handleInput(event) }} ></input></div>
 
                             <div>  <button  onClick={()=>{this.addTodo(this.state.input , false)}}>Add</button>  </div> 

@@ -107,7 +107,6 @@ class Timer extends React.Component{
 
 
         setTimeout(function(){ 
-            console.log('TIME OUT');
             dis.setState({ message_animation:'fade-out' }) }, 1000);
 
     }
@@ -115,7 +114,10 @@ class Timer extends React.Component{
     render(){   
         //0.016666667
         let getDegree = p =>(p/100)*180
-        console.log(this.state.message_animation)
+
+        let progress_number = this.props.pomodoroInfo.pomodores+1; 
+        let progress_tag = this.props.pomodoroInfo.mode === 'work' ? "Pomodoro Round "+ (progress_number) : "Break Session "+(progress_number -1 ); 
+        console.log(progress_tag);
 
         let left_degree =  getDegree(this.props.pieCoordinates.leftPie);
         let right_degree =  getDegree(this.props.pieCoordinates.rightPie);
@@ -130,8 +132,9 @@ class Timer extends React.Component{
                 
             <div className={"timer-message "+this.state.message_animation} style={{backgroundColor:this.state.messageColor}} > <h1> {this.state.message} </h1> </div>             
             
-            <div className="main-top" ><TomatoTrackerComponent/></div>
-    
+                    <div className="main-top" > <TomatoTrackerComponent/> </div>
+                    <div className="progress-label" style={{borderColor:this.state.messageColor}}  > <h1>{progress_tag}</h1>  </div>
+
             <div className="timerContainer" style={styles.timerContainer}>
 
             <div className="timerBackground" style={ styles.timerBackground}></div>
@@ -158,7 +161,8 @@ var mapStateToProps = (state)=>{
 
     return{
         timer:state.timer.timerStarted,
-        pieCoordinates:state.timer.pieCoordinates   
+        pieCoordinates:state.timer.pieCoordinates,
+        pomodoroInfo:state.timer.pomodoroInfo
     }   
 }
 
